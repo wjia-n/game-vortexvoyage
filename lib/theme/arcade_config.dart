@@ -83,6 +83,8 @@ const arcadeConfig = ArcadeConfig(
   fallDown: false,
   tip1Id: 'vortexvoyagepretzel',
   tip2Id: 'vortexvoyagemuffin',
-  tip1Label: '💛 Buy me a pretzel',
-  tip2Label: '💛 Buy me a muffin',
+  tip1Label: '💛 Buy me a pretzel for Vortex Voyage',
+
+  tip2Label: '💛 Buy me a muffin for Vortex Voyage',
+
 );
