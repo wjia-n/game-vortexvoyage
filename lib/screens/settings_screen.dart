@@ -41,15 +41,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
       backgroundColor: c.darkColor,
       appBar: AppBar(title: const Text('Settings'), backgroundColor: c.primaryColor, foregroundColor: Colors.white),
       body: ListView(padding: const EdgeInsets.all(16), children: [
-              TransferSaveTile(gameSlug: 'vortexvoyage'),
-        const Text('PLAYER NAME', style: TextStyle(color: Colors.white54, fontSize: 12)),
-        const SizedBox(height: 6),
-        TextField(controller: _nameCtrl, style: const TextStyle(color: Colors.white),
-          decoration: InputDecoration(filled: true, fillColor: Colors.white10, hintText: 'Your name',
-            hintStyle: const TextStyle(color: Colors.white30),
-            border: OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none)),
-          onChanged: (v) { playerName = v; _svc.setPlayerName(v); }),
-        const SizedBox(height: 16),
         const Text('DIFFICULTY', style: TextStyle(color: Colors.white54, fontSize: 12)),
         const SizedBox(height: 6),
         Row(children: List.generate(3, (i) => Expanded(child: Padding(
@@ -60,6 +51,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
             selectedColor: c.accentColor,
             onSelected: (_) { setState(() => diffIdx = i); _svc.setDifficulty(i); },
           ))))),
+        const SizedBox(height: 16),
+        const Text('PLAYER NAME', style: TextStyle(color: Colors.white54, fontSize: 12)),
+        const SizedBox(height: 6),
+        TextField(controller: _nameCtrl, style: const TextStyle(color: Colors.white),
+          decoration: InputDecoration(filled: true, fillColor: Colors.white10, hintText: 'Your name',
+            hintStyle: const TextStyle(color: Colors.white30),
+            border: OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none)),
+          onChanged: (v) { playerName = v; _svc.setPlayerName(v); }),
         const SizedBox(height: 16),
         Row(children: [
           const Text('THEME', style: TextStyle(color: Colors.white54, fontSize: 12)),
@@ -92,6 +91,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
             );
           }),
         const SizedBox(height: 16),
+        _toggle('🎵 Music', music, (v) { setState(() => music = v); _svc.setMusic(v); }),
+        _toggle('🔊 Sound FX', sfx, (v) { setState(() => sfx = v); _svc.setSfx(v); }),
+        _toggle('📳 Vibration', vibration, (v) { setState(() => vibration = v); _svc.setVibration(v); }),
+        const SizedBox(height: 16),
         const Text('PLAYER SHAPE', style: TextStyle(color: Colors.white54, fontSize: 12)),
         const SizedBox(height: 6),
         Row(children: List.generate(arcShapes.length, (i) => Expanded(child: GestureDetector(
@@ -110,10 +113,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
         Center(child: Text(arcShapeNames[shapeIdx % arcShapeNames.length],
             style: const TextStyle(color: Colors.white54, fontSize: 12))),
         const SizedBox(height: 16),
-        _toggle('🎵 Music', music, (v) { setState(() => music = v); _svc.setMusic(v); }),
-        _toggle('🔊 Sound FX', sfx, (v) { setState(() => sfx = v); _svc.setSfx(v); }),
-        _toggle('📳 Vibration', vibration, (v) { setState(() => vibration = v); _svc.setVibration(v); }),
-        const SizedBox(height: 16),
         if (activeTheme != null)
           Text('Preview uses "${activeTheme.name}" in menus after restart.',
               style: const TextStyle(color: Colors.white38, fontSize: 12)),
@@ -123,6 +122,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
           const SizedBox(height: 6),
           Text(c.howTo, style: const TextStyle(color: Colors.white70)),
         ]))),
+        const SizedBox(height: 16),
+        TransferSaveTile(gameSlug: 'vortexvoyage'),
       ]),
     );
   }
